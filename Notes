@@ -1,0 +1,35 @@
+point is to look at the different ddata strucuutres and compare their
+effectivenmess in this project, timing them and see if you can discren the
+difference between them, and thcause the data set is very small, we may want to
+ do them many times (that timing code we used before)
+
+ we're going to crawl the site, store the results that we get, and then we're
+ goin to do the search
+
+ the data structures should all return the same results, does it take longer
+ for one of the data structures to crawl and store, does it take one longer to
+ search, and you can time all of them
+
+
+ how would we find a list of word we find on a website in a binary tree?
+ well, in a binary search tree, the BST condition, everything is lst is smaller
+  than the root, and everything on the right is larger than the root, so in
+  this case we can store everything alphabetically
+
+  #for all
+  for all of these we should not have to write any code for the data structure,
+   we should re-use all of out code.
+
+   even if you don't get the results that you expect, think about their
+   properties and talk about what you
+
+  #hash table
+  we're going to take the string and hash it and store it
+  we can use the hashqp we wrote, we should just be able to plug it in
+
+
+  #avl tree
+  is a bst that we're going to use
+
+  #splay tree
+  same thing as well
