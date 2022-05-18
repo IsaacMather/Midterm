@@ -27,18 +27,19 @@ class WebStore:
 
 
     def crawl(self, url:str, depth:0, reg_ex=""):
-        list_of_links = link_fisher(url, depth,reg_ex)
-        for link in list_of_links:
+
+        #like all of this shit is in crawl and list
+        for link in link_fisher(url, depth,reg_ex):
             list_of_words = text_harvester(link)
-            for word in list_of_words:
-                if len(word) >= 4:
-                    if word in self._store:
-                        #where am i getting the location for this?
-                        location = None
-                        self._store[word].add(url, location)
-                    else:
-                        keyword_to_store = KeywordEntry(word,link,location)
-                        self._store.insert(keyword_to_store)
+            for location, word in enumerate(list_of_words):
+                if len(word) < 4 or not word.isalpha():
+                    continue
+                if word in self._store:
+                    keyword_object = self._store.find(word)
+                    keyword_object.add(url, location)
+                else:
+                    keyword_to_store = KeywordEntry(word,link,location)
+                    self._store.insert(keyword_to_store)
 
         #use link_fisher(), passing the three parameters thatt were passed
         # to crawl, to capture a list of links. Iterate through the list of
@@ -58,6 +59,8 @@ class WebStore:
         pass
 
     def search_list(self,kw_list: list):
+        try:
+
         # THis is just a wrapper for our search method. It should iterate \
         # through kw_list, calling search() for each item in the lsit. Be
         # sure to wrap the call to search() in a try/except block as we will

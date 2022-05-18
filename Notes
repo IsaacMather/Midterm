@@ -1,3 +1,10 @@
+so what is the difference between crawl_and_list and crawl? it seems like
+crawl_and_list does 90% of what crawl is supposed to do
+
+
+
+
+
 point is to look at the different ddata strucuutres and compare their
 effectivenmess in this project, timing them and see if you can discren the
 difference between them, and thcause the data set is very small, we may want to

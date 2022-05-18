@@ -22,6 +22,13 @@ class BinarySearchTree:
     def size(self):
         return self._size
 
+    def __contains__(self, data):
+        try:
+            self.find(data)
+            return True
+        except self.NotFoundError:
+            return False
+
     def find(self, key):
         return self._find(key, self._root)
 
