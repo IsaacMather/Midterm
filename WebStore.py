@@ -52,14 +52,23 @@ class WebStore:
         pass
 
     def search(self, keyword: str):
+        keyword_object = self._store.find(keyword)
+        return keyword_object.sites()
         #Okay we said we wouldn't do search yet, but we do need to make sure
         # things are loaded correctly. This method will just be a placeholder,
         # and should return a list (not a KeywordENtry object) of all pages
         # that contain keyword.
-        pass
+
 
     def search_list(self,kw_list: list):
-        try:
+
+        for keyword in kw_list:
+            try:
+                self.search(keyword)
+            except:
+                continue
+
+
 
         # THis is just a wrapper for our search method. It should iterate \
         # through kw_list, calling search() for each item in the lsit. Be
