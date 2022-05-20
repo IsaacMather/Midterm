@@ -32,7 +32,7 @@ def _link_fisher(url: str, depth=0, reg_ex=""):
         link_list += _link_fisher(link, depth - 1, reg_ex)
 
     link_list.append(url)
-    print(link_list)
+    # print(link_list)
     return link_list
 
 

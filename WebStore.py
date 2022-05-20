@@ -35,11 +35,10 @@ class WebStore:
 
         for keyword in kw_list:
             try:
-                self.search(keyword)
-                found += 1
+                if self.search(keyword):
+                    found += 1
             except:
                 not_found += 1
-                continue
 
         return (found, not_found)
 

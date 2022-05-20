@@ -88,7 +88,7 @@ class HashQP:
         bucket = self._find_pos(data)
         if self._buckets[bucket]._state == HashEntry.State.ACTIVE and \
                 self._buckets[bucket]._data == data:
-            print(f'successfully found {data}')
+            # print(f'successfully found {data}')
             return self._buckets[bucket]._data
         else:
             raise HashQP.NotFoundError
@@ -99,7 +99,7 @@ class HashQP:
         if self._buckets[bucket]._state != HashEntry.State.ACTIVE:
             return False
         else:
-            print(f'successfully removed {self._buckets[bucket]._data._word}')
+            # print(f'successfully removed {self._buckets[bucket]._data._word}')
             self._buckets[bucket]._state = HashEntry.State.DELETED
             self._size -= 1
             return True
@@ -115,7 +115,7 @@ class HashQP:
         self._size += 1
         if self._load_size > self._max_lambda * self._table_size:
             self._rehash()
-        print(f' Successfully inserted {data._word}')
+        # print(f' Successfully inserted {data._word}')
         return True
 
     def _rehash(self):
