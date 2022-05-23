@@ -1,4 +1,5 @@
 from BST import *
+import random
 
 
 class AVLTreeNode(BinaryTreeNode):
@@ -33,41 +34,36 @@ class AVLTree(BinarySearchTree):
         new_sub_root.calc_height()
 
     def right_rotation(self, sub_root):
+        # Identify the new sub_root and save to a temporary variable
         new_sub_root = sub_root.left_child
-        old_sub_root = sub_root
 
-        if self._root == sub_root:
-            self._root = new_sub_root
+        # Move the node that would otherwise become the "middle node" to its new
+        # position on the left side of the tree
+        # Thus maneuver also makes space for the old sub_root
+        sub_root.left_child = new_sub_root.right_child
 
-        old_sub_root.left_child = new_sub_root.right_child
-        new_sub_root.right_child = old_sub_root
+        # Move the old sub_root to its position on the right of the new sub_root
+        new_sub_root.right_child = sub_root
 
-        if new_sub_root.right_child:
-            new_sub_root.right_child.calc_height()
-        if new_sub_root.left_child:
-            new_sub_root.left_child.calc_height()
-        new_sub_root.calc_height()
+        self.calc_heights_after_rotation(new_sub_root)
 
         return new_sub_root
 
     def left_rotation(self, sub_root):
+        # Identify the new sub_root and save to a temporary variable
         new_sub_root = sub_root.right_child
-        old_sub_root = sub_root
 
-        if self._root == sub_root:
-            self._root = new_sub_root
+        # Move the node that would otherwise become the "middle node" to its new
+        # position on the right side of the tree
+        # Thus maneuver also makes space for the old sub_root
+        sub_root.right_child = new_sub_root.left_child
 
-        old_sub_root.right_child = new_sub_root.left_child
-        new_sub_root.left_child = old_sub_root
+        # Move the old sub_root to its position on the left of the new sub_root
+        new_sub_root.left_child = sub_root
 
-        if new_sub_root.right_child:
-            new_sub_root.right_child.calc_height()
-        if new_sub_root.left_child:
-            new_sub_root.left_child.calc_height()
-        new_sub_root.calc_height()
+        self.calc_heights_after_rotation(new_sub_root)
 
         return new_sub_root
-
 
 
     def _insert(self, data, sub_root):
@@ -98,7 +94,7 @@ class AVLTree(BinarySearchTree):
                     node.left_child = self.left_rotation(node.left_child)
             node = self.right_rotation(node)
         elif right_height - left_height > 1:
-            # Right Rotation Needed
+            # Left Rotation Needed
             if node.right_child is not None:
                 (left_height, right_height) = \
                     node.right_child.child_heights

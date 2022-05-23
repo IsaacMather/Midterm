@@ -161,10 +161,11 @@ class WebStore:
             for location, word in enumerate(list_of_words):
                 if len(word) < 4 or not word.isalpha():
                     continue
-                if word in self._store:
+                try:
+                    self._store.find(word)
                     keyword_object = self._store.find(word)
                     keyword_object.add(url, location)
-                else:
+                except self._store.NotFoundError:
                     keyword_to_store = KeywordEntry(word,link,location)
                     self._store.insert(keyword_to_store)
 
@@ -209,6 +210,7 @@ if __name__ == '__main__':
     search_trials = 10
     crawl_trials = 1
     structures = [BinarySearchTree, SplayTree, AVLTree, HashQP]
+    results = {} #isaac ads
     for depth in range(4):
         print("Depth = ", depth)
         stores = [WebStore(ds) for ds in structures]
@@ -226,6 +228,8 @@ if __name__ == '__main__':
                 known_count += 1
         print(f"{known_count / len(random_words) * 100:.1f}% of random words "
               f"are in known words")
+        #isaac ads
+
         for i, store in enumerate(stores):
             print("\n\nData Structure:", structures[i])
             time_s = timeit.timeit(
@@ -262,400 +266,400 @@ if __name__ == '__main__':
 # /Users/isaacmather/PycharmProjects/Midterm/venv/bin/python /Users/isaacmather/PycharmProjects/Midterm/main.py
 # Depth =  0
 # 38 have been stored in the crawl
-# 2.6% of random words are in known words
+# 0.0% of random words are in known words
 #
 #
 # Data Structure: <class 'BST.BinarySearchTree'>
-# Crawl and Store took 0.07 seconds
+# Crawl and Store took 0.06 seconds
 # Search is random from total pool of random words
 # - Searching for 38 words
-# -- 1 of the words in kw_list were found, out of 38 or 3%
-# --  5.85 microseconds per search
+# -- 0 of the words in kw_list were found, out of 38 or 0%
+# --  8.59 microseconds per search
 # - Searching for 3 words
 # -- 0 of the words in kw_list were found, out of 3 or 0%
-# --  4.68 microseconds per search
+# --  6.33 microseconds per search
 # - Searching for 1 words
 # -- 0 of the words in kw_list were found, out of 1 or 0%
-# --  3.44 microseconds per search
+# -- 13.42 microseconds per search
 # Search only includes words that appear on the site
 # - Searching for 38 words
 # -- 38 of the words in kw_list were found, out of 38 or 100%
-# --  5.26 microseconds per search
+# --  5.07 microseconds per search
 # - Searching for 3 words
 # -- 3 of the words in kw_list were found, out of 3 or 100%
-# --  5.94 microseconds per search
+# --  5.98 microseconds per search
 # - Searching for 1 words
 # -- 1 of the words in kw_list were found, out of 1 or 100%
-# --  6.69 microseconds per search
+# --  5.77 microseconds per search
 #
 #
 # Data Structure: <class 'splay_tree.SplayTree'>
-# Crawl and Store took 0.08 seconds
+# Crawl and Store took 0.06 seconds
 # Search is random from total pool of random words
 # - Searching for 38 words
-# -- 1 of the words in kw_list were found, out of 38 or 3%
-# -- 26.29 microseconds per search
+# -- 0 of the words in kw_list were found, out of 38 or 0%
+# -- 10.89 microseconds per search
 # - Searching for 3 words
 # -- 0 of the words in kw_list were found, out of 3 or 0%
-# -- 24.63 microseconds per search
+# --  9.90 microseconds per search
 # - Searching for 1 words
 # -- 0 of the words in kw_list were found, out of 1 or 0%
-# -- 17.92 microseconds per search
+# --  7.79 microseconds per search
 # Search only includes words that appear on the site
 # - Searching for 38 words
 # -- 38 of the words in kw_list were found, out of 38 or 100%
-# -- 18.59 microseconds per search
+# -- 12.38 microseconds per search
 # - Searching for 3 words
 # -- 3 of the words in kw_list were found, out of 3 or 100%
-# -- 15.69 microseconds per search
+# --  5.21 microseconds per search
 # - Searching for 1 words
 # -- 1 of the words in kw_list were found, out of 1 or 100%
-# --  2.81 microseconds per search
+# --  2.66 microseconds per search
 #
 #
 # Data Structure: <class 'AVL_tree.AVLTree'>
-# Crawl and Store took 0.09 seconds
+# Crawl and Store took 0.06 seconds
 # Search is random from total pool of random words
 # - Searching for 38 words
-# -- 1 of the words in kw_list were found, out of 38 or 3%
-# --  5.78 microseconds per search
+# -- 0 of the words in kw_list were found, out of 38 or 0%
+# --  5.58 microseconds per search
 # - Searching for 3 words
 # -- 0 of the words in kw_list were found, out of 3 or 0%
-# --  6.06 microseconds per search
+# --  5.43 microseconds per search
 # - Searching for 1 words
 # -- 0 of the words in kw_list were found, out of 1 or 0%
-# --  5.43 microseconds per search
+# --  6.29 microseconds per search
 # Search only includes words that appear on the site
 # - Searching for 38 words
 # -- 38 of the words in kw_list were found, out of 38 or 100%
-# --  4.49 microseconds per search
+# --  4.51 microseconds per search
 # - Searching for 3 words
 # -- 3 of the words in kw_list were found, out of 3 or 100%
-# --  4.61 microseconds per search
+# --  8.27 microseconds per search
 # - Searching for 1 words
 # -- 1 of the words in kw_list were found, out of 1 or 100%
-# --  5.50 microseconds per search
+# -- 10.21 microseconds per search
 #
 #
 # Data Structure: <class 'hash_table.HashQP'>
-# Crawl and Store took 0.07 seconds
+# Crawl and Store took 0.06 seconds
 # Search is random from total pool of random words
 # - Searching for 38 words
-# -- 1 of the words in kw_list were found, out of 38 or 3%
-# --  3.08 microseconds per search
+# -- 0 of the words in kw_list were found, out of 38 or 0%
+# --  3.27 microseconds per search
 # - Searching for 3 words
 # -- 0 of the words in kw_list were found, out of 3 or 0%
-# --  3.55 microseconds per search
+# --  3.78 microseconds per search
 # - Searching for 1 words
 # -- 0 of the words in kw_list were found, out of 1 or 0%
-# --  3.70 microseconds per search
+# --  2.80 microseconds per search
 # Search only includes words that appear on the site
 # - Searching for 38 words
 # -- 38 of the words in kw_list were found, out of 38 or 100%
-# --  4.61 microseconds per search
+# --  3.33 microseconds per search
 # - Searching for 3 words
 # -- 3 of the words in kw_list were found, out of 3 or 100%
-# --  4.45 microseconds per search
+# --  4.73 microseconds per search
 # - Searching for 1 words
 # -- 1 of the words in kw_list were found, out of 1 or 100%
-# --  6.77 microseconds per search
+# --  7.16 microseconds per search
 # Depth =  1
 # 598 have been stored in the crawl
-# 14.5% of random words are in known words
+# 10.7% of random words are in known words
 #
 #
 # Data Structure: <class 'BST.BinarySearchTree'>
-# Crawl and Store took 0.66 seconds
+# Crawl and Store took 0.58 seconds
 # Search is random from total pool of random words
 # - Searching for 598 words
-# -- 87 of the words in kw_list were found, out of 598 or 15%
-# -- 10.01 microseconds per search
+# -- 64 of the words in kw_list were found, out of 598 or 11%
+# -- 10.07 microseconds per search
 # - Searching for 59 words
-# -- 9 of the words in kw_list were found, out of 59 or 15%
-# -- 10.14 microseconds per search
+# -- 7 of the words in kw_list were found, out of 59 or 12%
+# -- 10.11 microseconds per search
 # - Searching for 5 words
-# -- 1 of the words in kw_list were found, out of 5 or 20%
-# -- 11.48 microseconds per search
+# -- 0 of the words in kw_list were found, out of 5 or 0%
+# -- 10.74 microseconds per search
 # Search only includes words that appear on the site
 # - Searching for 598 words
 # -- 598 of the words in kw_list were found, out of 598 or 100%
-# --  8.78 microseconds per search
+# --  8.70 microseconds per search
 # - Searching for 59 words
 # -- 59 of the words in kw_list were found, out of 59 or 100%
-# --  8.65 microseconds per search
+# --  8.60 microseconds per search
 # - Searching for 5 words
 # -- 5 of the words in kw_list were found, out of 5 or 100%
-# --  9.61 microseconds per search
+# --  9.01 microseconds per search
 #
 #
 # Data Structure: <class 'splay_tree.SplayTree'>
-# Crawl and Store took 0.70 seconds
-# Search is random from total pool of random words
-# - Searching for 598 words
-# -- 87 of the words in kw_list were found, out of 598 or 15%
-# -- 14.77 microseconds per search
-# - Searching for 59 words
-# -- 11 of the words in kw_list were found, out of 59 or 19%
-# -- 11.49 microseconds per search
-# - Searching for 5 words
-# -- 1 of the words in kw_list were found, out of 5 or 20%
-# --  6.48 microseconds per search
-# Search only includes words that appear on the site
-# - Searching for 598 words
-# -- 598 of the words in kw_list were found, out of 598 or 100%
-# -- 18.07 microseconds per search
-# - Searching for 59 words
-# -- 59 of the words in kw_list were found, out of 59 or 100%
-# -- 13.73 microseconds per search
-# - Searching for 5 words
-# -- 5 of the words in kw_list were found, out of 5 or 100%
-# --  5.11 microseconds per search
-#
-#
-# Data Structure: <class 'AVL_tree.AVLTree'>
 # Crawl and Store took 0.62 seconds
 # Search is random from total pool of random words
 # - Searching for 598 words
-# -- 87 of the words in kw_list were found, out of 598 or 15%
-# --  8.32 microseconds per search
+# -- 64 of the words in kw_list were found, out of 598 or 11%
+# -- 14.76 microseconds per search
 # - Searching for 59 words
-# -- 10 of the words in kw_list were found, out of 59 or 17%
-# --  8.02 microseconds per search
-# - Searching for 5 words
-# -- 1 of the words in kw_list were found, out of 5 or 20%
-# --  7.68 microseconds per search
-# Search only includes words that appear on the site
-# - Searching for 598 words
-# -- 598 of the words in kw_list were found, out of 598 or 100%
-# --  6.99 microseconds per search
-# - Searching for 59 words
-# -- 59 of the words in kw_list were found, out of 59 or 100%
-# --  7.11 microseconds per search
-# - Searching for 5 words
-# -- 5 of the words in kw_list were found, out of 5 or 100%
-# --  7.11 microseconds per search
-#
-#
-# Data Structure: <class 'hash_table.HashQP'>
-# Crawl and Store took 0.60 seconds
-# Search is random from total pool of random words
-# - Searching for 598 words
-# -- 87 of the words in kw_list were found, out of 598 or 15%
-# --  2.68 microseconds per search
-# - Searching for 59 words
-# -- 6 of the words in kw_list were found, out of 59 or 10%
-# --  2.57 microseconds per search
+# -- 3 of the words in kw_list were found, out of 59 or 5%
+# -- 12.47 microseconds per search
 # - Searching for 5 words
 # -- 0 of the words in kw_list were found, out of 5 or 0%
-# --  3.36 microseconds per search
+# --  8.38 microseconds per search
 # Search only includes words that appear on the site
 # - Searching for 598 words
 # -- 598 of the words in kw_list were found, out of 598 or 100%
-# --  4.49 microseconds per search
+# -- 17.17 microseconds per search
 # - Searching for 59 words
 # -- 59 of the words in kw_list were found, out of 59 or 100%
-# --  7.23 microseconds per search
+# -- 14.47 microseconds per search
 # - Searching for 5 words
 # -- 5 of the words in kw_list were found, out of 5 or 100%
-# --  5.90 microseconds per search
-# Depth =  2
-# 3920 have been stored in the crawl
-# 72.3% of random words are in known words
-#
-#
-# Data Structure: <class 'BST.BinarySearchTree'>
-# Crawl and Store took 7.34 seconds
-# Search is random from total pool of random words
-# - Searching for 3920 words
-# -- 2833 of the words in kw_list were found, out of 3920 or 72%
-# -- 12.40 microseconds per search
-# - Searching for 392 words
-# -- 292 of the words in kw_list were found, out of 392 or 74%
-# -- 11.76 microseconds per search
-# - Searching for 39 words
-# -- 28 of the words in kw_list were found, out of 39 or 72%
-# -- 10.74 microseconds per search
-# Search only includes words that appear on the site
-# - Searching for 3920 words
-# -- 3920 of the words in kw_list were found, out of 3920 or 100%
-# -- 12.22 microseconds per search
-# - Searching for 392 words
-# -- 392 of the words in kw_list were found, out of 392 or 100%
-# -- 11.27 microseconds per search
-# - Searching for 39 words
-# -- 39 of the words in kw_list were found, out of 39 or 100%
-# -- 11.58 microseconds per search
-#
-#
-# Data Structure: <class 'splay_tree.SplayTree'>
-# Crawl and Store took 7.24 seconds
-# Search is random from total pool of random words
-# - Searching for 3920 words
-# -- 2833 of the words in kw_list were found, out of 3920 or 72%
-# -- 20.35 microseconds per search
-# - Searching for 392 words
-# -- 286 of the words in kw_list were found, out of 392 or 73%
-# -- 15.94 microseconds per search
-# - Searching for 39 words
-# -- 28 of the words in kw_list were found, out of 39 or 72%
-# -- 10.50 microseconds per search
-# Search only includes words that appear on the site
-# - Searching for 3920 words
-# -- 3920 of the words in kw_list were found, out of 3920 or 100%
-# -- 21.79 microseconds per search
-# - Searching for 392 words
-# -- 392 of the words in kw_list were found, out of 392 or 100%
-# -- 15.06 microseconds per search
-# - Searching for 39 words
-# -- 39 of the words in kw_list were found, out of 39 or 100%
-# --  9.29 microseconds per search
+# --  5.39 microseconds per search
 #
 #
 # Data Structure: <class 'AVL_tree.AVLTree'>
-# Crawl and Store took 7.27 seconds
+# Crawl and Store took 0.60 seconds
 # Search is random from total pool of random words
-# - Searching for 3920 words
-# -- 2833 of the words in kw_list were found, out of 3920 or 72%
-# -- 10.00 microseconds per search
-# - Searching for 392 words
-# -- 283 of the words in kw_list were found, out of 392 or 72%
-# --  9.56 microseconds per search
-# - Searching for 39 words
-# -- 28 of the words in kw_list were found, out of 39 or 72%
-# --  9.38 microseconds per search
+# - Searching for 598 words
+# -- 64 of the words in kw_list were found, out of 598 or 11%
+# --  8.22 microseconds per search
+# - Searching for 59 words
+# -- 7 of the words in kw_list were found, out of 59 or 12%
+# --  8.15 microseconds per search
+# - Searching for 5 words
+# -- 0 of the words in kw_list were found, out of 5 or 0%
+# --  9.14 microseconds per search
 # Search only includes words that appear on the site
-# - Searching for 3920 words
-# -- 3920 of the words in kw_list were found, out of 3920 or 100%
-# -- 10.10 microseconds per search
-# - Searching for 392 words
-# -- 392 of the words in kw_list were found, out of 392 or 100%
-# --  9.17 microseconds per search
-# - Searching for 39 words
-# -- 39 of the words in kw_list were found, out of 39 or 100%
-# --  9.02 microseconds per search
+# - Searching for 598 words
+# -- 598 of the words in kw_list were found, out of 598 or 100%
+# --  7.44 microseconds per search
+# - Searching for 59 words
+# -- 59 of the words in kw_list were found, out of 59 or 100%
+# --  6.92 microseconds per search
+# - Searching for 5 words
+# -- 5 of the words in kw_list were found, out of 5 or 100%
+# --  7.29 microseconds per search
 #
 #
 # Data Structure: <class 'hash_table.HashQP'>
-# Crawl and Store took 7.38 seconds
+# Crawl and Store took 0.58 seconds
+# Search is random from total pool of random words
+# - Searching for 598 words
+# -- 64 of the words in kw_list were found, out of 598 or 11%
+# --  2.77 microseconds per search
+# - Searching for 59 words
+# -- 6 of the words in kw_list were found, out of 59 or 10%
+# --  2.73 microseconds per search
+# - Searching for 5 words
+# -- 1 of the words in kw_list were found, out of 5 or 20%
+# --  2.93 microseconds per search
+# Search only includes words that appear on the site
+# - Searching for 598 words
+# -- 598 of the words in kw_list were found, out of 598 or 100%
+# --  2.99 microseconds per search
+# - Searching for 59 words
+# -- 59 of the words in kw_list were found, out of 59 or 100%
+# --  2.99 microseconds per search
+# - Searching for 5 words
+# -- 5 of the words in kw_list were found, out of 5 or 100%
+# --  2.83 microseconds per search
+# Depth =  2
+# 3920 have been stored in the crawl
+# 71.8% of random words are in known words
+#
+#
+# Data Structure: <class 'BST.BinarySearchTree'>
+# Crawl and Store took 7.11 seconds
 # Search is random from total pool of random words
 # - Searching for 3920 words
-# -- 2833 of the words in kw_list were found, out of 3920 or 72%
-# --  3.23 microseconds per search
+# -- 2814 of the words in kw_list were found, out of 3920 or 72%
+# -- 12.72 microseconds per search
 # - Searching for 392 words
-# -- 265 of the words in kw_list were found, out of 392 or 68%
-# --  2.92 microseconds per search
+# -- 293 of the words in kw_list were found, out of 392 or 75%
+# -- 12.39 microseconds per search
 # - Searching for 39 words
-# -- 32 of the words in kw_list were found, out of 39 or 82%
+# -- 26 of the words in kw_list were found, out of 39 or 67%
+# -- 12.29 microseconds per search
+# Search only includes words that appear on the site
+# - Searching for 3920 words
+# -- 3920 of the words in kw_list were found, out of 3920 or 100%
+# -- 12.72 microseconds per search
+# - Searching for 392 words
+# -- 392 of the words in kw_list were found, out of 392 or 100%
+# -- 12.83 microseconds per search
+# - Searching for 39 words
+# -- 39 of the words in kw_list were found, out of 39 or 100%
+# -- 11.43 microseconds per search
+#
+#
+# Data Structure: <class 'splay_tree.SplayTree'>
+# Crawl and Store took 6.87 seconds
+# Search is random from total pool of random words
+# - Searching for 3920 words
+# -- 2814 of the words in kw_list were found, out of 3920 or 72%
+# -- 20.90 microseconds per search
+# - Searching for 392 words
+# -- 296 of the words in kw_list were found, out of 392 or 76%
+# -- 15.83 microseconds per search
+# - Searching for 39 words
+# -- 29 of the words in kw_list were found, out of 39 or 74%
+# -- 10.63 microseconds per search
+# Search only includes words that appear on the site
+# - Searching for 3920 words
+# -- 3920 of the words in kw_list were found, out of 3920 or 100%
+# -- 22.50 microseconds per search
+# - Searching for 392 words
+# -- 392 of the words in kw_list were found, out of 392 or 100%
+# -- 15.84 microseconds per search
+# - Searching for 39 words
+# -- 39 of the words in kw_list were found, out of 39 or 100%
+# --  9.41 microseconds per search
+#
+#
+# Data Structure: <class 'AVL_tree.AVLTree'>
+# Crawl and Store took 7.14 seconds
+# Search is random from total pool of random words
+# - Searching for 3920 words
+# -- 2814 of the words in kw_list were found, out of 3920 or 72%
+# -- 10.31 microseconds per search
+# - Searching for 392 words
+# -- 277 of the words in kw_list were found, out of 392 or 71%
+# --  9.95 microseconds per search
+# - Searching for 39 words
+# -- 28 of the words in kw_list were found, out of 39 or 72%
+# --  9.45 microseconds per search
+# Search only includes words that appear on the site
+# - Searching for 3920 words
+# -- 3920 of the words in kw_list were found, out of 3920 or 100%
+# -- 10.51 microseconds per search
+# - Searching for 392 words
+# -- 392 of the words in kw_list were found, out of 392 or 100%
+# --  9.34 microseconds per search
+# - Searching for 39 words
+# -- 39 of the words in kw_list were found, out of 39 or 100%
+# --  8.90 microseconds per search
+#
+#
+# Data Structure: <class 'hash_table.HashQP'>
+# Crawl and Store took 6.76 seconds
+# Search is random from total pool of random words
+# - Searching for 3920 words
+# -- 2814 of the words in kw_list were found, out of 3920 or 72%
+# --  3.11 microseconds per search
+# - Searching for 392 words
+# -- 264 of the words in kw_list were found, out of 392 or 67%
+# --  2.90 microseconds per search
+# - Searching for 39 words
+# -- 27 of the words in kw_list were found, out of 39 or 69%
 # --  3.06 microseconds per search
 # Search only includes words that appear on the site
 # - Searching for 3920 words
 # -- 3920 of the words in kw_list were found, out of 3920 or 100%
-# --  4.07 microseconds per search
+# --  4.21 microseconds per search
 # - Searching for 392 words
 # -- 392 of the words in kw_list were found, out of 392 or 100%
-# --  3.20 microseconds per search
+# --  2.94 microseconds per search
 # - Searching for 39 words
 # -- 39 of the words in kw_list were found, out of 39 or 100%
-# --  3.25 microseconds per search
+# --  2.99 microseconds per search
 # Depth =  3
 # 5298 have been stored in the crawl
 # 97.2% of random words are in known words
 #
 #
 # Data Structure: <class 'BST.BinarySearchTree'>
-# Crawl and Store took 180.71 seconds
+# Crawl and Store took 67.96 seconds
 # Search is random from total pool of random words
 # - Searching for 5298 words
-# -- 5148 of the words in kw_list were found, out of 5298 or 97%
-# -- 12.71 microseconds per search
+# -- 5149 of the words in kw_list were found, out of 5298 or 97%
+# -- 12.72 microseconds per search
 # - Searching for 529 words
-# -- 515 of the words in kw_list were found, out of 529 or 97%
-# -- 12.31 microseconds per search
+# -- 508 of the words in kw_list were found, out of 529 or 96%
+# -- 13.15 microseconds per search
 # - Searching for 52 words
-# -- 52 of the words in kw_list were found, out of 52 or 100%
-# -- 12.41 microseconds per search
+# -- 51 of the words in kw_list were found, out of 52 or 98%
+# -- 12.67 microseconds per search
 # Search only includes words that appear on the site
 # - Searching for 5298 words
 # -- 5298 of the words in kw_list were found, out of 5298 or 100%
-# -- 12.57 microseconds per search
+# -- 13.14 microseconds per search
 # - Searching for 529 words
 # -- 529 of the words in kw_list were found, out of 529 or 100%
-# -- 12.00 microseconds per search
+# -- 12.25 microseconds per search
 # - Searching for 52 words
 # -- 52 of the words in kw_list were found, out of 52 or 100%
-# -- 12.89 microseconds per search
+# -- 11.50 microseconds per search
 #
 #
 # Data Structure: <class 'splay_tree.SplayTree'>
-# Crawl and Store took 77.22 seconds
+# Crawl and Store took 74.82 seconds
 # Search is random from total pool of random words
 # - Searching for 5298 words
-# -- 5148 of the words in kw_list were found, out of 5298 or 97%
-# -- 23.31 microseconds per search
+# -- 5149 of the words in kw_list were found, out of 5298 or 97%
+# -- 23.29 microseconds per search
 # - Searching for 529 words
-# -- 511 of the words in kw_list were found, out of 529 or 97%
-# -- 15.90 microseconds per search
+# -- 516 of the words in kw_list were found, out of 529 or 98%
+# -- 17.03 microseconds per search
 # - Searching for 52 words
-# -- 50 of the words in kw_list were found, out of 52 or 96%
+# -- 49 of the words in kw_list were found, out of 52 or 94%
 # -- 10.52 microseconds per search
 # Search only includes words that appear on the site
 # - Searching for 5298 words
 # -- 5298 of the words in kw_list were found, out of 5298 or 100%
-# -- 24.31 microseconds per search
+# -- 23.36 microseconds per search
 # - Searching for 529 words
 # -- 529 of the words in kw_list were found, out of 529 or 100%
-# -- 16.03 microseconds per search
+# -- 16.17 microseconds per search
 # - Searching for 52 words
 # -- 52 of the words in kw_list were found, out of 52 or 100%
-# --  9.63 microseconds per search
+# -- 10.13 microseconds per search
 #
 #
 # Data Structure: <class 'AVL_tree.AVLTree'>
-# Crawl and Store took 73.37 seconds
+# Crawl and Store took 68.40 seconds
 # Search is random from total pool of random words
 # - Searching for 5298 words
-# -- 5148 of the words in kw_list were found, out of 5298 or 97%
-# -- 10.42 microseconds per search
+# -- 5149 of the words in kw_list were found, out of 5298 or 97%
+# -- 10.52 microseconds per search
 # - Searching for 529 words
-# -- 515 of the words in kw_list were found, out of 529 or 97%
-# --  9.78 microseconds per search
+# -- 517 of the words in kw_list were found, out of 529 or 98%
+# -- 10.21 microseconds per search
 # - Searching for 52 words
-# -- 51 of the words in kw_list were found, out of 52 or 98%
-# --  9.52 microseconds per search
+# -- 52 of the words in kw_list were found, out of 52 or 100%
+# --  9.77 microseconds per search
 # Search only includes words that appear on the site
 # - Searching for 5298 words
 # -- 5298 of the words in kw_list were found, out of 5298 or 100%
-# -- 10.64 microseconds per search
+# -- 10.53 microseconds per search
 # - Searching for 529 words
 # -- 529 of the words in kw_list were found, out of 529 or 100%
-# --  9.68 microseconds per search
+# -- 10.09 microseconds per search
 # - Searching for 52 words
 # -- 52 of the words in kw_list were found, out of 52 or 100%
-# --  9.48 microseconds per search
+# --  9.99 microseconds per search
 #
 #
 # Data Structure: <class 'hash_table.HashQP'>
-# Crawl and Store took 70.62 seconds
+# Crawl and Store took 73.56 seconds
 # Search is random from total pool of random words
 # - Searching for 5298 words
-# -- 5148 of the words in kw_list were found, out of 5298 or 97%
-# --  3.93 microseconds per search
+# -- 5149 of the words in kw_list were found, out of 5298 or 97%
+# --  3.84 microseconds per search
 # - Searching for 529 words
-# -- 515 of the words in kw_list were found, out of 529 or 97%
-# --  4.57 microseconds per search
+# -- 513 of the words in kw_list were found, out of 529 or 97%
+# --  3.30 microseconds per search
 # - Searching for 52 words
 # -- 51 of the words in kw_list were found, out of 52 or 98%
-# --  3.78 microseconds per search
+# --  3.17 microseconds per search
 # Search only includes words that appear on the site
 # - Searching for 5298 words
 # -- 5298 of the words in kw_list were found, out of 5298 or 100%
-# --  4.44 microseconds per search
+# --  3.77 microseconds per search
 # - Searching for 529 words
 # -- 529 of the words in kw_list were found, out of 529 or 100%
-# --  3.40 microseconds per search
+# --  3.46 microseconds per search
 # - Searching for 52 words
 # -- 52 of the words in kw_list were found, out of 52 or 100%
-# --  3.21 microseconds per search
+# --  3.00 microseconds per search
 # 10 search trials and 1 crawl trials were conducted
 #
 # Process finished with exit code 0

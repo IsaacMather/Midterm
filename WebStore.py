@@ -16,10 +16,11 @@ class WebStore:
             for location, word in enumerate(list_of_words):
                 if len(word) < 4 or not word.isalpha():
                     continue
-                if word in self._store:
+                try:
+                    self._store.find(word)
                     keyword_object = self._store.find(word)
                     keyword_object.add(url, location)
-                else:
+                except self._store.NotFoundError:
                     keyword_to_store = KeywordEntry(word,link,location)
                     self._store.insert(keyword_to_store)
 

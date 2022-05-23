@@ -1,3 +1,31 @@
+
+situation you would want to use differnt data structures
+
+specfically in the context of this crawling assignment
+pages with a lot of data on them
+lets say you have a huge amount of data you want to store
+
+best way to do it would be to put it all in a pandas dataframe, and then pipe
+that over to matplotlib
+
+look at depth vs time to search
+look at time vs number of words
+
+
+maybe make it so you can export the findings of time per search in a list,
+perhaps add it as a dictionary, have a dictionary of dictionaries
+
+make it a list, and pull it out of the buckets
+for the repeat perforance can make it a list of lists, or use hash map/table
+(dictionary)
+
+some buckets:
+data structure type
+depth
+crawl and store performance
+search from pool of random words
+search from words that only appear on the site
+
 so what is up with my search function? for some reason it's not respongding
 that it's finding things, or that counter is not going up
 
